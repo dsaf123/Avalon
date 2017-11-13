@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <link type="text/css" href="css/styles.css">
+    <link rel="stylesheet" type="text/css" href="//fonts.googleapis.com/css?family=Open+Sans" />
+    <link rel="stylesheet" type="text/css" href="//fonts.googleapis.com/css?family=Raleway" />
+    <title>Avalon</title>
+  </head>
+
+  <body>
+    <center>
+    <div class="content" style="max-width:500px">
+        <h1 id="h1" style="font-family: Raleway; font-weight:normal"> Avalon </h1>
+        <hr>
+        <br>
+        <form id="name-form">
+        </form>
+        <button onclick="joinBtnClick()" type="button">Join Game</button>
+        <button onclick="createBtnClick()" type= "button">Create Game</button>
+        <p id ="text1"> </p>
+    </div>
+    </center>
+
+  </body>
+</html>
+<script src="https://cdn.socket.io/socket.io-1.4.5.js"></script>
+<script>
+var nameForm = document.getElementById('name-form');
+var h1 = document.getElementById('h1');
+var p = document.getElementById('text1');
+var socket = io();
+
+socket.on('updateH1', function(data) {
+  h1.innerHTML = data;
+});
+
+socket.on('updateText1', function(data) {
+  p.innerHTML = data;
+});
+
+nameForm.onsubmit = function(e){
+  e.preventDefault();
+  if (document.getElementById("name-input")) {
+      var nameInput1 = document.getElementById("name-input");
+      e.preventDefault();
+      socket.emit('createGame', nameInput1.value);
+      nameInput1.value = "";
+      nameInput1.parentNode.removeChild(nameInput1);
+      nameForm.parentNode.removeChild(nameForm);
+  }
+  if (document.getElementById("game-input")) {
+      var gameInput = document.getElementById("game-input");
+      var gameNameInput = document.getElementById("game-name-input");
+      e.preventDefault();
+      socket.emit('sendName', gameNameInput.value);
+      socket.emit('joinGame', gameInput.value);
+      gameInput.parentNode.removeChild(gameInput);
+      gameNameInput.parentNode.removeChild(gameNameInput);
+      nameForm.parentNode.removeChild(nameForm);
+  }
+}
+
+function removeObjects() {
+  if (document.getElementById("name-input")) {
+      var toDelete = document.getElementById('name-input');
+      toDelete.parentNode.removeChild(toDelete);
+  }
+  if (document.getElementById("game-input")) {
+      var toDelete = document.getElementById('game-input');
+      toDelete.parentNode.removeChild(toDelete);
+  }
+  if (document.getElementById("game-name-input")) {
+      var toDelete = document.getElementById('game-name-input');
+      toDelete.parentNode.removeChild(toDelete);
+  }
+}
+
+function joinBtnClick() {
+    removeObjects();
+    if (!document.getElementById("game-input")) {
+        var gameInput = document.createElement("input");
+        gameInput.type = "text";
+        gameInput.setAttribute("id", "game-input");
+        gameInput.placeholder = "Enter game id";
+        nameForm.appendChild(gameInput);
+        }
+    if (!document.getElementById("game-name-input")) {
+        var gameNameInput = document.createElement("input");
+        var submit = document.createElement("input");
+        submit.type = "submit"
+        gameNameInput.type = "text";
+        gameNameInput.setAttribute("id", "game-name-input");
+        gameNameInput.placeholder = "Enter your name";
+        nameForm.appendChild(gameNameInput);
+        nameForm.appendChild(submit);
+    }
+    if (!document.getElementById("join-submit")) {
+        var submit = document.createElement("input");
+        submit.type = "submit";
+        nameForm.appendChild(submit);
+    }
+}
+
+function createBtnClick() {
+    removeObjects();
+    if (!document.getElementById("name-input")) {
+        var nameInput1 = document.createElement("input")
+        nameInput1.type = "text";
+        nameInput1.setAttribute("id", "name-input");
+        nameInput1.placeholder = "Enter your name";
+        nameForm.appendChild(nameInput1);
+    }
+    if (!document.getElementById("create-submit")) {
+        var submit = document.createElement("input");
+        submit.type = "submit";
+        nameForm.appendChild(submit);
+
+
+    }
+}
+</script>
+
