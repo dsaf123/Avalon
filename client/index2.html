@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html>
+  <title>Avalon</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Raleway">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+  <style>
+body,h1 {font-family: "Raleway", Arial, sans-serif}
+h1 {letter-spacing: 6px}
+.w3-row-padding img {margin-bottom: 12px}
+i  </style>
+  <body>
+
+    <!-- !PAGE CONTENT! -->
+    <div class="w3-content" style="max-width:500px">
+
+      <!-- Header -->
+      <header class="w3-panel w3-center w3-opacity" style="padding:64px 16px">
+        <h1>AVALON</h1>
+        <h1 class="w3-xlarge">Evan</h1>
+      </header>
+
+      <!--PERSONAL INFORMATION-->
+      <div class="w3-light-grey" style="width:33% padding:64px 16px">
+        <button onclick="myFunction('Demo2')" class="w3-button w3-center w3-block">Personal Information</button>
+        <div id="Demo2" class="w3-hide w3-container">
+          <p class="w3-center">You are Merlin</p>
+          <p class="w3-left-align">Merlin can see all Minions of Mordred except for Modred. At the end of the game if the good guys win, the Assassin has a chance to kill Merlin and the Minions of Mordred win.</p>
+          <p>The following players are Minions of Modred:</p>
+          <table>
+            <tr>
+              <td>Andrew</td>
+            </tr>
+            <tr>
+              <td>Matthew</td>
+            </tr>
+          </table>
+          <p></p>
+        </div>
+      </div>
+
+      <!--PLAYER LIST-->
+      <button onclick="myFunction('players')" class="w3-button w3-block">Players</button>
+      <div id="players" class="w3-hide">
+        <table class="w3-center-align w3-hoverable">
+          <tr>
+            <td>Evan</td>
+          </tr>
+          <tr>
+            <td>Andrew</td>
+          </tr>
+          <tr>
+            <td>Kyle</td>
+          </tr>
+          <tr>
+            <td>Nick</td>
+          </tr>
+          <tr>
+            <td>Matthew</td>
+          </tr>
+        </table>
+      </div>
+
+      <!--MISSION INFORMATION-->
+      <div class="btn-group w3-center">
+        <button onclick="myFunction('mission1')" class="w3-bar-item w3-button w3-mobile w3-center">Mission 1</button>
+        <button onclick="myFunction('mission2')" class="w3-bar-item w3-button w3-mobile w3-center">Mission 2</button>
+        <button onclick="myFunction('mission3')" class="w3-bar-item w3-button w3-mobile w3-center">Mission 3</button>
+        <button onclick="myFunction('mission4')" class="w3-bar-item w3-button w3-mobile w3-center">Mission 4</button>
+        <button onclick="myFunction('mission5')" class="w3-bar-item w3-button w3-mobile w3-center">Mission 5</button>
+
+        <div id="mission1" class="w3-container w3-hide">
+          <p>Mission 1</p>
+          <img src="img/Avalon-tableau.jpg" alt="Mission 1" style="width:500px;height:372px;">
+        </div>
+
+        <div id="mission2" class="w3-container w3-hide">
+          <p>Mission 2</p>
+        </div>
+
+        <div id="mission3" class="w3-container w3-hide">
+          <p>Mission 3</p>
+        </div>
+
+        <div id="mission4" class="w3-container w3-hide">
+          <p>Mission 4</p>
+        </div>
+
+        <div id="mission5" class="w3-container w3-hide">
+          <p>Mission 5</p>
+        </div>
+      </div>
+
+    <!-- End Page Content -->
+    </div>
+
+    <!-- Footer -->
+    <footer class="w3-container w3-padding-64 w3-light-grey w3-center w3-large"> 
+      <i class="fa fa-facebook-official w3-hover-opacity"></i>
+      <i class="fa fa-instagram w3-hover-opacity"></i>
+      <i class="fa fa-snapchat w3-hover-opacity"></i>
+      <i class="fa fa-pinterest-p w3-hover-opacity"></i>
+      <i class="fa fa-twitter w3-hover-opacity"></i>
+      <i class="fa fa-linkedin w3-hover-opacity"></i>
+      <p>Powered by <a href="https://www.w3schools.com/w3css/default.asp" target="_blank" class="w3-hover-text-green">w3.css</a></p>
+    </footer>
+  </body>
+
+
+
+
+</html>
+
+<script>
+function myFunction(id) {
+  var x = document.getElementById(id);
+  if (x.className.indexOf("w3-show") == -1) {
+    x.className += " w3-show";
+  } else { 
+    x.className = x.className.replace(" w3-show", "");
+  }
+}
+</script>
