@@ -41,7 +41,7 @@ router.get('/game', function(req, res){
   });
 });
 
-serv.listen(2000);
+serv.listen(process.env.PORT || 2000);
 console.log("Server started.");;
 var SOCKET_LIST = {};
 var PLAYER_LIST = [];
