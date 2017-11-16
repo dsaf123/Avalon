@@ -207,8 +207,26 @@ io.sockets.on('connection', function(socket){
 
             players[playerctr].socket.emit('setCharDesc', "You are Oberon. Your identity is unknown to both Merlin and your fellow minions of mordred.");
             players[playerctr].socket.emit('setCharDesc2', "");
-            playersctr++;
+            playerctr++;
             numBad++;
+          }
+           // Lancelot check
+          if (data[8]) {
+          players[playerctr].desc = "Loyal Lancelot";
+          players[playerctr].loyalty = "good";
+          players[playerctr].socket.emit('setchar', players[playerctr].desc);
+          players[playerctr].socket.emit('setCharDesc', "You are the loyal Lancelot. Your identity is unknown. You are to begin as a good guy. After the third mission, you may have a change of heart.");
+          players[playerctr].socket.emit('setCharDesc2', "");
+          playerctr++;
+          numGood++
+
+          players[playerctr].desc = "Evil Lancelot";
+          players[playerctr].loyalty = "bad lancelot";
+          players[playerctr].socket.emit('setchar', players[playerctr].desc);
+          players[playerctr].socket.emit('setCharDesc', "You are the evil Lancelot. Your identity is known to all bad guys. You are to begin as a bad guy. After the third mission, you may have a change of heart.");
+          players[playerctr].socket.emit('setCharDesc2', "");
+          playerctr++;
+          numBad++
           }
           for (var i = numGood; i < totalGood; i++) {
             players[playerctr].desc = "Loyal Servant of Arthur";
@@ -269,6 +287,9 @@ io.sockets.on('connection', function(socket){
                     if (players[j].desc === "Mordred") {
                       players[i].socket.emit('setCharPlayers', players[j].name);
                     }
+                    if (players[j].desc === "Evil Lancelot") {
+                      players[i].socket.emit('setCharPlayers', players[j].name + " - " + players[j].desc);
+                    }
                   }
                 }
                 break;
@@ -281,6 +302,10 @@ io.sockets.on('connection', function(socket){
                     if (players[j].desc === "Mordred") {
                       players[i].socket.emit('setCharPlayers', players[j].name);
                     }
+                    if (players[j].desc === "Evil Lancelot") {
+                      players[i].socket.emit('setCharPlayers', players[j].name + " - " + players[j].desc);
+                    }
+
                   }
                 }
                 break;
@@ -293,6 +318,10 @@ io.sockets.on('connection', function(socket){
                     if (players[j].desc === "Mordred") {
                       players[i].socket.emit('setCharPlayers', players[j].name);
                     }
+                    if (players[j].desc === "Evil Lancelot") {
+                      players[i].socket.emit('setCharPlayers', players[j].name + " - " + players[j].desc);
+                    }
+
                   }
                 }
 
