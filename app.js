@@ -61,6 +61,7 @@ io.sockets.on('connection', function(socket){
   console.log('Player connected. ID: ' + socket.id);
 
   socket.on('disconnect',function() {
+    socket.socket.connect();
     delete SOCKET_LIST[socket.id];
     for (var i in PLAYER_LIST) {
       if (PLAYER_LIST[i].id === socket.id) {
