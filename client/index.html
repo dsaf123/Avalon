@@ -46,6 +46,8 @@
       <label>Percival</label>
       <input id="twinsbox" class="w3-check" type="checkbox" checked="unchecked">
       <label>Twins</label>
+      <input id = "lancelotbox" class="w3-check" type="checkbox">
+      <label>Lancelot</label>
       <hr>
       <input id="assassinbox" class="w3-check" type="checkbox" checked="unchecked">
       <label>Assassin</label>
@@ -313,6 +315,7 @@ function startGame() {
     data.push(document.getElementById("morganabox").checked);
     data.push(document.getElementById("mordredbox").checked);
     data.push(document.getElementById("oberonbox").checked);
+    data.push(document.getElementById("lancelotbox").checked);
     socket.emit('startGame', data);
 }
 </script>
