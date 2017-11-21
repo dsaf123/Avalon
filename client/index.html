@@ -100,12 +100,39 @@
 var nameForm = document.getElementById('name-form');
 var h1 = document.getElementById('h1');
 var p = document.getElementById('text1');
-var socket = io();
+var socket = io.connect({
+  'force new connection': true,
+  'reconnection': true,
+  'reconnectionDelay': 500,
+  'reconnectionAttempts': 10
+});
+
+var tryReconnect = function(){
+
+      if (socketClient.socket.connected === false &&
+                  socketClient.socket.connecting === false) {
+                // use a connect() or reconnect() here if you want
+                socketClient.socket.connect()
+                     }
+}
+
+var reconnect = setInterval(tryReconnect, 2000);
+
+socket.on('connect', function() {
+  clearInterval(reconnect);
+});
 
 socket.on('setchar', function(data) {
   var char = document.getElementById("char");
   char.innerHTML = data;
   var table = document.getElementById("char-players");
+  while (table.rows.length > 0) {
+      table.deleteRow(0);
+  }
+});
+
+socket.on('clearTable', function(data) {
+  var table = document.getElementById("player-list");
   while (table.rows.length > 0) {
       table.deleteRow(0);
   }
@@ -144,6 +171,10 @@ socket.on('addPlayer', function(data) {
 socket.on('host', function(data) {
     accordianExpand("hostOptions");
     accordianExpand("start-btn");
+});
+
+socket.on('disconnect' , function() {
+  socket.socket.reconnect();
 });
 
 nameForm.onsubmit = function(e){

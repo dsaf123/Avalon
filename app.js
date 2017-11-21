@@ -1,57 +1,25 @@
-class Player {
-  constructor(id) {
-    this.id = id;
-  }
-}
-
-class Game {
-  constructor(id) {
-    this.id = id;
-    this.players = [];
-    this.numPlayers = 0;
-    this.addPlayer = function(player) {
-      this.players[this.numPlayers] = player;
-      this.numPlayers++;
-    }
-  } 
-}
-
-function getRandID() {
-  var possibleChars = "abcdefghijklmnopqrstuvwxyz123456789";
-  var id = "";
-  for (var i = 0; i < 5; i++) {
-    id = id + (possibleChars.charAt(Math.floor(Math.random() * possibleChars.length)));
-  }
-  return id;
-}
+var SOCKET_LIST = {};
+var PLAYER_LIST = [];
+var NUM_PLAYERS = 0;
+var GAME_LIST = [];
 
 var express = require('express');
 var router = express.Router();
 var app = express();
 var serv = require('http').Server(app);
 
+// Set up express for delivering index.html page.
 app.get('/', function(req, res) {
   res.sendFile(__dirname + '/client/index.html');
 });
 app.use('client', express.static(__dirname + '/client'));
 
-router.get('/game', function(req, res){
-  res.render('game', {
-    title: 'Game'
-  });
-});
-
+// Start sever on heroku assigned port or 2000 for local testing
 serv.listen(process.env.PORT || 2000);
-console.log("Server started.");;
-var SOCKET_LIST = {};
-var PLAYER_LIST = [];
-var NUM_PLAYERS = 0;
-var GAME_LIST = [];
-
+console.log("Server started.");
 var io = require('socket.io')(serv, {});
-io.sockets.on('connection', function(socket){
-  console.log("Current Players: ");
-
+io.sockets.on('connection', function(socket){ 
+  // Initialize default socket variables
   socket.id = Math.random();
   socket.number = "" + Math.floor(10 * Math.random());
   SOCKET_LIST[socket.id] = socket;
@@ -65,6 +33,19 @@ io.sockets.on('connection', function(socket){
     for (var i in PLAYER_LIST) {
       if (PLAYER_LIST[i].id === socket.id) {
         delete PLAYER_LIST[i];
+      }
+    }
+    for (var i in GAME_LIST) {
+      for (var j in GAME_LIST[i].players) {
+        if (GAME_LIST[i].players[j].id === socket.id) {
+          delete GAME_LIST[i].players[j];
+          GAME_LIST[i].players.splice[j];
+          GAME_LIST[i].numPlayers -= 1;
+          for (var k in GAME_LIST[i].players) {
+            GAME_LIST[i].players[k].socket.emit('clearTable', '');
+            addCurrentToPlayer(GAME_LIST[i].id, GAME_LIST[i].players[k].socket);
+          }
+        }
       }
     }
     console.log('Player disconnected. ID: ' + socket.id);
@@ -92,6 +73,7 @@ io.sockets.on('connection', function(socket){
     }
     updateGame(gameID);
   });
+
   socket.on('startGame', function(data) {
     for (var i in GAME_LIST) {
       if (data[0] === GAME_LIST[i].id) {
@@ -143,7 +125,6 @@ io.sockets.on('connection', function(socket){
           if (data[2]) {
             players[playerctr].desc = "Percival";
             players[playerctr].loyalty = "good";
-
             players[playerctr].socket.emit('setchar', players[playerctr].desc);
             players[playerctr].socket.emit('setCharDesc', "Percival knows both Merlin and Morgana, but not who's who.");
             players[playerctr].socket.emit('setCharDesc2', "The following players are Merlin or Morgana:");
@@ -152,6 +133,7 @@ io.sockets.on('connection', function(socket){
           }
           // Twins check
           if (data[3]) {
+            // Create twin 1
             players[playerctr].desc = "Twin";
             players[playerctr].loyalty = "good";
             players[playerctr].socket.emit('setchar', players[playerctr].desc);
@@ -159,7 +141,7 @@ io.sockets.on('connection', function(socket){
             players[playerctr].socket.emit('setCharDesc2', "Your twin is: ");
             playerctr++;
             numGood++;
-
+            // Create twin 2
             players[playerctr].desc = "Twin";
             players[playerctr].loyalty = "good";
             players[playerctr].socket.emit('setchar', players[playerctr].desc);
@@ -212,6 +194,7 @@ io.sockets.on('connection', function(socket){
           }
            // Lancelot check
           if (data[8]) {
+          // Create loyal Lancelot.
           players[playerctr].desc = "Loyal Lancelot";
           players[playerctr].loyalty = "good";
           players[playerctr].socket.emit('setchar', players[playerctr].desc);
@@ -220,6 +203,7 @@ io.sockets.on('connection', function(socket){
           playerctr++;
           numGood++
 
+          // Create evil Lancelot.
           players[playerctr].desc = "Evil Lancelot";
           players[playerctr].loyalty = "bad lancelot";
           players[playerctr].socket.emit('setchar', players[playerctr].desc);
@@ -233,7 +217,6 @@ io.sockets.on('connection', function(socket){
             players[playerctr].loyalty = "good";
             players[playerctr].socket.emit('setchar', players[playerctr].desc);
             players[playerctr].socket.emit('setCharDesc2', "");
-
             players[playerctr].socket.emit('setCharDesc', "You are a loyal servant of Arthur. You must deduce who is a bad guy and prevent them from sabotaging missions.");
             playerctr++;
           }
@@ -242,7 +225,6 @@ io.sockets.on('connection', function(socket){
             players[playerctr].loyalty = "bad";
             players[playerctr].socket.emit('setchar', players[playerctr].desc);
             players[playerctr].socket.emit('setCharDesc2', "");
-
             players[playerctr].socket.emit('setCharDesc', "You are a minion of Mordred. Play with your fellow minions to wreck havoc on the Arthur and his loyal servants.");
             playerctr++;
           }
@@ -324,14 +306,13 @@ io.sockets.on('connection', function(socket){
 
                   }
                 }
-
             }
           }
         }
       }
     }
-
   });
+
   socket.on('sendName', function(data) {
     console.log("New Player: " + data);
     NUM_PLAYERS++;
@@ -342,8 +323,9 @@ io.sockets.on('connection', function(socket){
       }
     }
   });
+
   socket.on('joinGame', function(data) {
-    data = data.toLowerCase();;
+    data = data. toLowerCase();;
     socket.emit('updateH1', data);
     console.log("(" + data + ")");
     var player;
@@ -370,14 +352,13 @@ io.sockets.on('connection', function(socket){
     }
     game = data;
     updateGame(game);
-
-
   });
 });
-setInterval(function() {
 
-},1000/25);
-
+// Desc: updateGame() takes a game id as a parameter and gets a 
+//       list of all current players and logs to the console.
+// Pre:  Game id must already exist
+// Post: All current players will be output to the the server log.
 function updateGame(game) {
 
   console.log("updating game: (" + game + ")");
@@ -389,19 +370,15 @@ function updateGame(game) {
       }
     }
   }
-  console.log("a: " + names)
-  for(var i in GAME_LIST) {
-    if (GAME_LIST[i].id === game) {
-      for(var j in GAME_LIST[i].players) {
-        //GAME_LIST[i].players[j].socket.emit('updateText1', names);   
-
-
-      }
-    }
-  }
+  console.log("Players currently in " + game + ": " + names)
   io.in(game).emit('updateText1', names);
 }
 
+// Desc: addToGame() takes a gameid and a name and sends the player name
+//       to all current players already in the game.
+// Pre:  Game must already be created with the current id.
+// Post: All players in the game will receive name and add it to their
+//       current players list.
 function addToGame(game, name) {
   for(var i in GAME_LIST) {
     if (GAME_LIST[i].id === game) {
@@ -412,7 +389,13 @@ function addToGame(game, name) {
   }
 }
 
-function addCurrentToPlayer(game, socket) { 
+// Desc: addCurrentToPlayer() takes a gameid and a socket and sends all
+//       current players in the game with id game to the socket passed.
+// Pre:  Game must already be created with the current id. Socket must
+//       already be initialized.
+// Post: All current players in game will be sent to socket and added to
+//       their current players list.
+function addCurrentToPlayer(game, socket) {
   for(var i in GAME_LIST) {
     if (GAME_LIST[i].id === game) {
       for(var j in GAME_LIST[i].players) {
@@ -422,7 +405,21 @@ function addCurrentToPlayer(game, socket) {
   }
 }
 
+// Desc: getRandID() returns a sequence of 5 random alphanumerics as a string
+// Pre:  None
+// Post: A random string will be returned.
+function getRandID() {
+  var possibleChars = "abcdefghijklmnopqrstuvwxyz123456789";
+  var id = "";
+  for (var i = 0; i < 5; i++) {
+    id = id + (possibleChars.charAt(Math.floor(Math.random() * possibleChars.length)));
+  }
+  return id;
+}
 
+// Desc: shuffle() takes an array and shuffles it and then returns it
+// Pre:  None
+// Post: An array containing the same elements will be returned.
 function shuffle(array) {
   var currentIndex = array.length, temporaryValue, randomIndex;
 
@@ -441,3 +438,35 @@ function shuffle(array) {
 
   return array;
 }
+
+// Desc: constructor(id) takes an id and stores it. Initializes an array of players.
+//       and sets numPlayers to 0.
+// Pre:  None
+// Post: The id will be stored. An array of players will be instantiated and numPlayers
+//       will be 0.
+//
+// Desc: addPlayer() takes a player object and adds it to the array of players. Also it 
+//       increments numPlayers.
+// Pre:  None.
+// Post: player will be added to the array. numPlayers will be incremented.
+class Game {
+  constructor(id) {
+    this.id = id;
+    this.players = [];
+    this.numPlayers = 0;
+    this.addPlayer = function(player) {
+      this.players[this.numPlayers] = player;
+      this.numPlayers++;
+    }
+  } 
+}
+
+// Desc: constructor takes an id and stores it.
+// Pre:  None.
+// Post: id will be stored.
+class Player {
+  constructor(id) {
+    this.id = id;
+  }
+}
+
