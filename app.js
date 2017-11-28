@@ -192,25 +192,23 @@ io.sockets.on('connection', function(socket){
             playerctr++;
             numBad++;
           }
-           // Lancelot check
+          // Lancelot check
           if (data[8]) {
-          // Create loyal Lancelot.
-          players[playerctr].desc = "Loyal Lancelot";
-          players[playerctr].loyalty = "good";
-          players[playerctr].socket.emit('setchar', players[playerctr].desc);
-          players[playerctr].socket.emit('setCharDesc', "You are the loyal Lancelot. Your identity is unknown. You are to begin as a good guy. After the third mission, you may have a change of heart.");
-          players[playerctr].socket.emit('setCharDesc2', "");
-          playerctr++;
-          numGood++
+            players[playerctr].desc = "Loyal Lancelot";
+            players[playerctr].loyalty = "good";
+            players[playerctr].socket.emit('setchar', players[playerctr].desc);
+            players[playerctr].socket.emit('setCharDesc', "You are the loyal Lancelot. Your identity is unknown. You are to begin as a good guy. After the third mission, you may have a change of heart.");
+            players[playerctr].socket.emit('setCharDesc2', "");
+            playerctr++;
+            numGood++
 
-          // Create evil Lancelot.
-          players[playerctr].desc = "Evil Lancelot";
-          players[playerctr].loyalty = "bad lancelot";
-          players[playerctr].socket.emit('setchar', players[playerctr].desc);
-          players[playerctr].socket.emit('setCharDesc', "You are the evil Lancelot. Your identity is known to all bad guys. You are to begin as a bad guy. After the third mission, you may have a change of heart.");
-          players[playerctr].socket.emit('setCharDesc2', "");
-          playerctr++;
-          numBad++
+            players[playerctr].desc = "Evil Lancelot";
+            players[playerctr].loyalty = "bad lancelot";
+            players[playerctr].socket.emit('setchar', players[playerctr].desc);
+            players[playerctr].socket.emit('setCharDesc', "You are the evil Lancelot. Your identity is known to all bad guys. You are to begin as a bad guy. After the third mission, you may have a change of heart.");
+            players[playerctr].socket.emit('setCharDesc2', "");
+            playerctr++;
+            numBad++
           }
           for (var i = numGood; i < totalGood; i++) {
             players[playerctr].desc = "Loyal Servant of Arthur";
