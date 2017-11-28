@@ -10,90 +10,83 @@
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Raleway">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <style>
-        body,h1 {font-family: "Raleway", Arial, sans-serif}
-        h1 {letter-spacing: 6px}
-        .w3-row-padding img {margin-bottom: 12px}
+body,h1 {font-family: "Raleway", Arial, sans-serif}
+h1 {letter-spacing: 6px}
+.w3-row-padding img {margin-bottom: 12px}
     </style>
     <title>Avalon</title>
 
     <!-- Header -->
     <header class="w3-panel w3-center w3-opacity" style="padding:64px 16px">
-        <h1 >AVALON</h1>
-        <h1 id="h1" class="w3-xlarge"></h1>
+      <h1 >AVALON</h1>
+      <h1 id="h1" class="w3-xlarge"></h1>
     </header>
 
   </head>
   <div class="w3-content" style="max-width:500px">
-  <body>
+    <body>
       <div class="w3-center">
-      <form id="name-form">
-      </form>
-      <div id="buttonHolder">
-      <button id="joinbtn" class="w3-button w3-xxlarge" onclick="joinBtnClick()">Join Game</button>
-      <button id="createbtn" class="w3-button w3-xxlarge" onclick="createBtnClick()">Create Game</button>
-      </div>
-      <p id ="text1"> </p>
+        <form id="name-form">
+        </form>
+        <div id="buttonHolder">
+          <button id="joinbtn" class="w3-button w3-xxlarge" onclick="joinBtnClick()">Join Game</button>
+          <button id="createbtn" class="w3-button w3-xxlarge" onclick="createBtnClick()">Create Game</button>
+        </div>
+        <p id ="text1"> </p>
       </div>
 
-  <div id="hostOptions" style="width:33% padding:64px 16px" class="w3-hide">
-    
-      <button onclick="accordianExpand('hostGroup')" class="w3-xlarge w3-button w3-center w3-block">Host Options</button>
-    <div id="hostGroup" class="w3-hide w3-container w3-center">
-      <br>
-      <input id="merlinbox" class="w3-check" type="checkbox" checked="unchecked">
-      <label>Merlin</label>
-      <input id="percivalbox" class="w3-check" type="checkbox" checked="unchecked">
-      <label>Percival</label>
-      <input id="twinsbox" class="w3-check" type="checkbox" checked="unchecked">
-      <label>Twins</label>
-      <input id = "lancelotbox" class="w3-check" type="checkbox">
-      <label>Lancelot</label>
-      <hr>
-      <input id="assassinbox" class="w3-check" type="checkbox" checked="unchecked">
-      <label>Assassin</label>
-      <input id="morganabox" class="w3-check" type="checkbox" checked="unchecked">
-      <label>Morgana</label>
-      <input id="mordredbox" class="w3-check" type="checkbox" checked="unchecked">
-      <label>Mordred</label>
-      <input id="oberonbox" class="w3-check" type="checkbox" checked="unchecked">
-      <label>Oberon</label>
-      <br> 
-    </div>
+      <div id="hostOptions" style="width:33% padding:64px 16px" class="w3-hide">
 
-  </div>
-  <!--PERSONAL INFORMATION-->
-  <div class="w3-light-grey" style="width:33% padding:64px 16px">
-      <button onclick="accordianExpand('char-group')" class="w3-xlarge w3-button w3-center w3-block">Personal Information</button>
-      <div id="char-group" class="w3-hide w3-container">
-      <p id="char" class="w3-center">You are Merlin</p>
-      <p id="char-desc" class="w3-left-align">Merlin can see all Minions of Mordred except for Modred. At the end of the game if the good guys win, the Assassin has a chance to kill Merlin and the Minions of Mordred win.</p>
-      <p id="char-desc2">The following players are Minions of Modred:</p>
-      <table align="center"  id= "char-players">
-        <tr>
-          <td>Andrew</td>
-          </tr>
-          <tr>
-            <td>Matthew</td>
-          </tr>
-      </table>
-      <p></p>
+        <button onclick="accordianExpand('hostGroup')" class="w3-xlarge w3-button w3-center w3-block">Host Options</button>
+        <div id="hostGroup" class="w3-hide w3-container w3-center">
+          <br>
+          <input id="merlinbox" class="w3-check" type="checkbox" checked="unchecked">
+          <label>Merlin</label>
+          <input id="percivalbox" class="w3-check" type="checkbox" checked="unchecked">
+          <label>Percival</label>
+          <input id="twinsbox" class="w3-check" type="checkbox" checked="unchecked">
+          <label>Twins</label>
+          <input id = "lancelotbox" class="w3-check" type="checkbox">
+          <label>Lancelot</label>
+          <hr>
+          <input id="assassinbox" class="w3-check" type="checkbox" checked="unchecked">
+          <label>Assassin</label>
+          <input id="morganabox" class="w3-check" type="checkbox" checked="unchecked">
+          <label>Morgana</label>
+          <input id="mordredbox" class="w3-check" type="checkbox" checked="unchecked">
+          <label>Mordred</label>
+          <input id="oberonbox" class="w3-check" type="checkbox" checked="unchecked">
+          <label>Oberon</label>
+          <br> 
+        </div>
+
       </div>
+      <!--PERSONAL INFORMATION-->
+      <div id="personalInformation" class="w3-light-grey w3-hide" style="width:33% padding:64px 16px">
+        <button onclick="accordianExpand('char-group')" class="w3-xlarge w3-button w3-center w3-block">Personal Information</button>
+        <div id="char-group" class="w3-hide w3-container">
+          <p id="char" class="w3-center"></p>
+          <p id="char-desc" class="w3-left-align"></p>
+          <p id="char-desc2"></p>
+          <table align="center"  id= "char-players">
+          </table>
+          <p></p>
+        </div>
       </div>
-   
+
 
       <!--PLAYER LIST-->
-      <button onclick="accordianExpand('players')" class="w3-xlarge w3-button w3-block">Players</button>
+      <button id="playerList" onclick="accordianExpand('players')" class="w3-xlarge w3-button w3-block w3-hide">Players</button>
       <div id="players" class="w3-center w3-hide w3-show">
         <table align="center" id="player-list" class="w3-center-align w3-hoverable">
-
         </table>
       </div>
 
-  <div class="w3-light-grey" style="width:33% padding:64px 16px">
-      <button id="start-btn" onclick="startGame()" class="w3-hide w3-xlarge w3-button w3-center w3-block"> Start Game</button>
-    </div>
+      <div class="w3-light-grey" style="width:33% padding:64px 16px">
+        <button id="start-btn" onclick="startGame()" class="w3-hide w3-xlarge w3-button w3-center w3-block"> Start Game</button>
+      </div>
   </div>
-  </body>
+    </body>
 </html>
 <script src="https://cdn.socket.io/socket.io-1.4.5.js"></script>
 <script>
@@ -107,7 +100,7 @@ socket.on('setchar', function(data) {
   char.innerHTML = data;
   var table = document.getElementById("char-players");
   while (table.rows.length > 0) {
-      table.deleteRow(0);
+    table.deleteRow(0);
   }
 });
 socket.on('updateH1', function(data) {
@@ -118,164 +111,166 @@ socket.on('setCharDesc2', function(data) {
   charDesc2.innerHTML = data;
 });
 socket.on('setCharDesc', function(data) {
-    var charDesc = document.getElementById("char-desc");
-    charDesc.innerHTML = data;
+  var charDesc = document.getElementById("char-desc");
+  charDesc.innerHTML = data;
 
 });
 socket.on('setCharPlayers', function(data) {
-    var charPlayers = document.getElementById("char-players");
-    var row = charPlayers.insertRow(0);
-    var cell = row.insertCell(0);
-    row.className = "w3-center";
-    cell.innerHTML = data;
+  var charPlayers = document.getElementById("char-players");
+  var row = charPlayers.insertRow(0);
+  var cell = row.insertCell(0);
+  row.className = "w3-center";
+  cell.innerHTML = data;
 });
 socket.on('updateText1', function(data) {
   p.innerHTML = data;
 });
 
 socket.on('addPlayer', function(data) {
-    var playerForm = document.getElementById("player-list");
-    var row = playerForm.insertRow(0);
-    var cell = row.insertCell(0);
-    row.className = "w3-center";
-    cell.innerHTML = data; 
+  var playerForm = document.getElementById("player-list");
+  var row = playerForm.insertRow(0);
+  var cell = row.insertCell(0);
+  row.className = "w3-center";
+  cell.innerHTML = data; 
 });
 
 socket.on('host', function(data) {
-    accordianExpand("hostOptions");
-    accordianExpand("start-btn");
+  accordianExpand("hostOptions");
+  accordianExpand("start-btn");
 });
 
 nameForm.onsubmit = function(e){
   e.preventDefault();
   if (document.getElementById("name-input")) {
-      var nameInput1 = document.getElementById("name-input");
-      e.preventDefault();
-      socket.emit('createGame', nameInput1.value);
-      nameInput1.value = "";
-      nameInput1.parentNode.removeChild(nameInput1);
-      nameForm.parentNode.removeChild(nameForm);
+    var nameInput1 = document.getElementById("name-input");
+    e.preventDefault();
+    socket.emit('createGame', nameInput1.value);
+    nameInput1.value = "";
+    nameInput1.parentNode.removeChild(nameInput1);
+    nameForm.parentNode.removeChild(nameForm);
   }
   if (document.getElementById("game-input")) {
-      var gameInput = document.getElementById("game-input");
-      var gameNameInput = document.getElementById("game-name-input");
-      e.preventDefault();
-      socket.emit('sendName', gameNameInput.value);
-      socket.emit('joinGame', gameInput.value);
-      gameInput.parentNode.removeChild(gameInput);
-      gameNameInput.parentNode.removeChild(gameNameInput);
-      nameForm.parentNode.removeChild(nameForm);
+    var gameInput = document.getElementById("game-input");
+    var gameNameInput = document.getElementById("game-name-input");
+    e.preventDefault();
+    socket.emit('sendName', gameNameInput.value);
+    socket.emit('joinGame', gameInput.value);
+    gameInput.parentNode.removeChild(gameInput);
+    gameNameInput.parentNode.removeChild(gameNameInput);
+    nameForm.parentNode.removeChild(nameForm);
   }
+  accordianExpand("personalInformation");
+  accordianExpand("playerList");
 }
 
 function removeObjects() {
   if (document.getElementById("name-input")) {
-      var toDelete = document.getElementById('name-input');
-      toDelete.parentNode.removeChild(toDelete);
+    var toDelete = document.getElementById('name-input');
+    toDelete.parentNode.removeChild(toDelete);
   }
   if (document.getElementById("game-input")) {
-      var toDelete = document.getElementById('game-input');
-      toDelete.parentNode.removeChild(toDelete);
+    var toDelete = document.getElementById('game-input');
+    toDelete.parentNode.removeChild(toDelete);
   }
   if (document.getElementById("game-name-input")) {
-      var toDelete = document.getElementById('game-name-input');
-      toDelete.parentNode.removeChild(toDelete);
+    var toDelete = document.getElementById('game-name-input');
+    toDelete.parentNode.removeChild(toDelete);
   }
   if (document.getElementById("submit-btn-create")) {
-      var toDelete = document.getElementById("submit-btn-create");
-      toDelete.parentNode.removeChild(toDelete);
+    var toDelete = document.getElementById("submit-btn-create");
+    toDelete.parentNode.removeChild(toDelete);
   } 
   if (document.getElementById("submit-btn-join")) {
-      var toDelete = document.getElementById("submit-btn-join");
-      toDelete.parentNode.removeChild(toDelete);
+    var toDelete = document.getElementById("submit-btn-join");
+    toDelete.parentNode.removeChild(toDelete);
   } 
   if (document.getElementById("joinbtn")) {
-      var toDelete = document.getElementById("joinbtn");
-      toDelete.parentNode.removeChild(toDelete);
+    var toDelete = document.getElementById("joinbtn");
+    toDelete.parentNode.removeChild(toDelete);
   }
   if (document.getElementById("createbtn")) {
-      var toDelete = document.getElementById("createbtn");
-      toDelete.parentNode.removeChild(toDelete);
+    var toDelete = document.getElementById("createbtn");
+    toDelete.parentNode.removeChild(toDelete);
   }
   if (document.getElementById("createbackbtn")) {
-      var toDelete = document.getElementById("createbackbtn");
-      toDelete.parentNode.removeChild(toDelete);
+    var toDelete = document.getElementById("createbackbtn");
+    toDelete.parentNode.removeChild(toDelete);
   }
   if (document.getElementById("joinbackbtn")) {
-      var toDelete = document.getElementById("joinbackbtn");
-      toDelete.parentNode.removeChild(toDelete);
+    var toDelete = document.getElementById("joinbackbtn");
+    toDelete.parentNode.removeChild(toDelete);
   }
 }
 
 
 function joinBtnClick() {
-    removeObjects();
-    if (!document.getElementById("game-input")) {
-        var gameInput = document.createElement("input");
-        gameInput.type = "text";
-        gameInput.className = "w3-input w3-border";
-        gameInput.setAttribute("id", "game-input");
-        gameInput.placeholder = "Enter game id";
-        nameForm.appendChild(gameInput);
-        }
-    if (!document.getElementById("game-name-input")) {
-        var gameNameInput = document.createElement("input");
-        gameNameInput.type = "text";
-        gameNameInput.className = "w3-input w3-border";
-        gameNameInput.setAttribute("id", "game-name-input");
-        gameNameInput.placeholder = "Enter your name";
-        nameForm.appendChild(gameNameInput);
-    }
-    if (!document.getElementById("submit-btn-join")) {
-        var submit = document.createElement("button");
-        submit.type = "submit";
-        submit.innerHTML = "Submit";
-        submit.id = "submit-btn-join";
-        submit.className = "w3-button w3-xxlarge";
-        nameForm.appendChild(submit);
-    }
-    if (!document.getElementById("joinbackbtn")) {
-        var back = document.createElement("button");
-        back.id = "joinbackbtn";
-        back.type = "button";
-        back.className = "w3-button w3-xxlarge";
-        back.innerHTML = "Back";
-        back.setAttribute("onclick", "joinbackbtn()");
-        nameForm.appendChild(back);
+  removeObjects();
+  if (!document.getElementById("game-input")) {
+    var gameInput = document.createElement("input");
+    gameInput.type = "text";
+    gameInput.className = "w3-input w3-border";
+    gameInput.setAttribute("id", "game-input");
+    gameInput.placeholder = "Enter game id";
+    nameForm.appendChild(gameInput);
+  }
+  if (!document.getElementById("game-name-input")) {
+    var gameNameInput = document.createElement("input");
+    gameNameInput.type = "text";
+    gameNameInput.className = "w3-input w3-border";
+    gameNameInput.setAttribute("id", "game-name-input");
+    gameNameInput.placeholder = "Enter your name";
+    nameForm.appendChild(gameNameInput);
+  }
+  if (!document.getElementById("submit-btn-join")) {
+    var submit = document.createElement("button");
+    submit.type = "submit";
+    submit.innerHTML = "Submit";
+    submit.id = "submit-btn-join";
+    submit.className = "w3-button w3-xxlarge";
+    nameForm.appendChild(submit);
+  }
+  if (!document.getElementById("joinbackbtn")) {
+    var back = document.createElement("button");
+    back.id = "joinbackbtn";
+    back.type = "button";
+    back.className = "w3-button w3-xxlarge";
+    back.innerHTML = "Back";
+    back.setAttribute("onclick", "joinbackbtn()");
+    nameForm.appendChild(back);
 
-    }
+  }
 }
 
 function createBtnClick() {
-    removeObjects();
-    if (!document.getElementById("name-input")) {
-        var nameInput1 = document.createElement("input")
-        nameInput1.type = "text";
-        nameInput1.className = "w3-input w3-border";
-        nameInput1.setAttribute("id", "name-input");
-        nameInput1.placeholder = "Enter your name";
-        nameForm.appendChild(nameInput1);
-    }
-    if (!document.getElementById("submit-btn-create")) {
-        var submit = document.createElement("button");
-        submit.type = "submit";
-        submit.id = "submit-btn-create";
-        submit.innerHTML = "Submit";
-        submit.className = "w3-button w3-xxlarge";
-        nameForm.appendChild(submit);
+  removeObjects();
+  if (!document.getElementById("name-input")) {
+    var nameInput1 = document.createElement("input");
+    nameInput1.type = "text";
+    nameInput1.className = "w3-input w3-border";
+    nameInput1.setAttribute("id", "name-input");
+    nameInput1.placeholder = "Enter your name";
+    nameForm.appendChild(nameInput1);
+  }
+  if (!document.getElementById("submit-btn-create")) {
+    var submit = document.createElement("button");
+    submit.type = "submit";
+    submit.id = "submit-btn-create";
+    submit.innerHTML = "Submit";
+    submit.className = "w3-button w3-xxlarge";
+    nameForm.appendChild(submit);
 
 
-    }
-    if (!document.getElementById("createbackbtn")) {
-        var back = document.createElement("button");
-        back.id = "createbackbtn";
-        back.type = "button";
-        back.className = "w3-button w3-xxlarge";
-        back.innerHTML = "Back";
-        back.setAttribute("onclick", "backbtn()");
-        nameForm.appendChild(back);
+  }
+  if (!document.getElementById("createbackbtn")) {
+    var back = document.createElement("button");
+    back.id = "createbackbtn";
+    back.type = "button";
+    back.className = "w3-button w3-xxlarge";
+    back.innerHTML = "Back";
+    back.setAttribute("onclick", "backbtn()");
+    nameForm.appendChild(back);
 
-    }
+  }
 
 }
 function accordianExpand(id) {
@@ -287,36 +282,36 @@ function accordianExpand(id) {
   }
 }
 function backbtn() {
-    removeObjects();
-    var joinbtn = document.createElement("button");
-    joinbtn.innerHTML = "Join Game";
-    joinbtn.className = "w3-button w3-xxlarge";
-    joinbtn.id = "joinbtn";
-    joinbtn.setAttribute("onclick", "joinBtnClick()");
+  removeObjects();
+  var joinbtn = document.createElement("button");
+  joinbtn.innerHTML = "Join Game";
+  joinbtn.className = "w3-button w3-xxlarge";
+  joinbtn.id = "joinbtn";
+  joinbtn.setAttribute("onclick", "joinBtnClick()");
 
-    var create = document.createElement("button");
-    create.innerHTML = "Create Game";
-    create.className = "w3-button w3-xxlarge";
-    create.id = "createbtn";
-    create.setAttribute("onclick", "createBtnClick()");
-  
-    var holder = document.getElementById("buttonHolder");
-    holder.appendChild(joinbtn);
-    holder.appendChild(create);
+  var create = document.createElement("button");
+  create.innerHTML = "Create Game";
+  create.className = "w3-button w3-xxlarge";
+  create.id = "createbtn";
+  create.setAttribute("onclick", "createBtnClick()");
+
+  var holder = document.getElementById("buttonHolder");
+  holder.appendChild(joinbtn);
+  holder.appendChild(create);
 
 }
 function startGame() {
-    var data  = [];
-    data.push(h1.innerHTML);
-    data.push(document.getElementById("merlinbox").checked);
-    data.push(document.getElementById("percivalbox").checked);
-    data.push(document.getElementById("twinsbox").checked);
-    data.push(document.getElementById("assassinbox").checked);
-    data.push(document.getElementById("morganabox").checked);
-    data.push(document.getElementById("mordredbox").checked);
-    data.push(document.getElementById("oberonbox").checked);
-    data.push(document.getElementById("lancelotbox").checked);
-    socket.emit('startGame', data);
+  var data  = [];
+  data.push(h1.innerHTML);
+  data.push(document.getElementById("merlinbox").checked);
+  data.push(document.getElementById("percivalbox").checked);
+  data.push(document.getElementById("twinsbox").checked);
+  data.push(document.getElementById("assassinbox").checked);
+  data.push(document.getElementById("morganabox").checked);
+  data.push(document.getElementById("mordredbox").checked);
+  data.push(document.getElementById("oberonbox").checked);
+  data.push(document.getElementById("lancelotbox").checked);
+  socket.emit('startGame', data);
 }
 </script>
 
